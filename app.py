@@ -2,8 +2,43 @@ import pickle
 from flask import Flask, request, jsonify, app, url_for, render_template
 import pandas as pd
 import numpy as np
-from sklearn.preprocessing import OneHotEncoder
+# from sklearn.preprocessing import OneHotEncoder
 from catboost import CatBoostRegressor
+
+
+
+#load data
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 app = Flask(__name__) # create an app instance
