@@ -2,13 +2,12 @@ from flask import Flask, request, jsonify, app, url_for, render_template
 import pandas as pd
 import numpy as np
 import joblib
-# from sklearn.preprocessing import OneHotEncoder
 from sklearn.compose import ColumnTransformer
 from sklearn.preprocessing import StandardScaler
 from catboost import CatBoostRegressor
 
 
-app = Flask(__name__) # create an app instance
+app = Flask(__name__) 
 model = joblib.load('./artifacts/Regressor_Model.pkl')
 Numerical_transformer = joblib.load('./artifacts/Numerical_Transformer.pkl')
 OneHot_encoder = joblib.load('./artifacts/OneHot_Encoder.pkl')
@@ -16,24 +15,24 @@ Area_encoder = joblib.load('./artifacts/Area_Encoder.pkl')
 Price_transformer = joblib.load('./artifacts/Price_yeo_johnson_transformer.pkl') 
 
 
-# @app.route('/',methods=['GET'])
-# def Home():
-#     return render_template('index.html')
+@app.route('/',methods=['GET'])
+def Home():
+    return render_template('index.html')
 
 
 @app.route("/predict", methods=['POST'])
 def predict():
     if request.method == 'POST':
         # Extract form data
-        Date = request.form['Date'] #از فرم به صورت تقویم
-        Area = request.form['Area']  #از فرم به صورت دراپ داون
-        Location = request.form['Location']  #از فرم به صورت دراپ داون
-        Type = request.form['Type'] #از فرم به صورت دراپ داون
-        MinDayNights = int(request.form['MinDayNights'])  #از فرم
-        CountReview = float(request.form['CountReview'])  #از فرم
-        AvgReview = int(request.form['AvgReview'])  #از فرم
-        TotalHostListings = int(request.form['TotalHostListings'])  #از فرم
-        DayAvailability = int(request.form['DayAvailability'])  #از فرم
+        Date = request.form['Date'] 
+        Area = request.form['Area'] 
+        Location = request.form['Location']  
+        Type = request.form['Type'] 
+        MinDayNights = int(request.form['MinDayNights'])  
+        CountReview = float(request.form['CountReview'])  
+        AvgReview = int(request.form['AvgReview']) 
+        TotalHostListings = int(request.form['TotalHostListings']) 
+        DayAvailability = int(request.form['DayAvailability']) 
 
         # Create a DataFrame for the input data
         input_df = pd.DataFrame({
@@ -105,12 +104,13 @@ def predict():
         # Make prediction
         prediction = model.predict(input_df)
         prediction_original = Price_transformer.inverse_transform(prediction.reshape(-1, 1))
-        output = round(prediction_original[0], 2)
+        output = round(float(prediction_original[0][0]), 2)
+
         
         if output < 0:
             return render_template('index.html', prediction_texts="Sorry you cannot rent your room")
         else:
-            return render_template('index.html', prediction_text="You can rent at: $ {}".format(output))
+            return render_template('index.html', prediction_text="You can rent at daily price: $ {}".format(output))
     else:
         return render_template('index.html')
         

@@ -5,50 +5,134 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Price Prediction</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #f4f4f4;
+            text-align: center;
+            padding: 20px;
+        }
+
+        .container {
+            background: white;
+            max-width: 500px;
+            margin: auto;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        h2 {
+            color: #333;
+        }
+
+        p {
+            color: #666;
+            font-size: 14px;
+        }
+
+        form {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        label {
+            font-weight: bold;
+            text-align: left;
+        }
+
+        input,
+        select {
+            padding: 8px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 14px;
+        }
+
+        button {
+            background: #007BFF;
+            color: white;
+            border: none;
+            padding: 10px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+
+        button:hover {
+            background: #0056b3;
+        }
+
+        .prediction {
+            margin-top: 15px;
+            font-size: 18px;
+            font-weight: bold;
+            color: #28a745;
+        }
+    </style>
 </head>
 
 <body>
-    <h2>Enter Property Details</h2>
-    <form action="/predict" method="post">
-        <label for="Date">Last Review Date:</label>
-        <input type="date" name="Date" required><br><br>
 
-        <label for="Area">Area:</label>
-        <input type="text" name="Area" required><br><br>
+    <div class="container">
+        <h2>AirBNB Renting Price Predictor</h2>
+        <p>I'm Mehrdad. This application is a demo price predictor that estimates how much your property could be worth
+            for renting on Airbnb. The model is trained on data from 2024.</p>
 
-        <label for="Location">Location:</label>
-        <select name="Location">
-            <option value="Brooklyn">Brooklyn</option>
-            <option value="Manhattan">Manhattan</option>
-            <option value="Queens">Queens</option>
-            <option value="Staten Island">Staten Island</option>
-        </select><br><br>
+        <div class="social-links">
+            <a href="https://www.youtube.com/@Mer_Dehghan" target="_blank">
+                <img src="https://www.youtube.com/favicon.ico" alt="YouTube" width="20">
+            </a>
+            <a href="https://www.linkedin.com/in/mehrdad-dehghan/" target="_blank">
+                <img src="https://www.linkedin.com/favicon.ico" alt="LinkedIn" width="20">
+            </a>
+        </div>
 
-        <label for="Type">Type:</label>
-        <select name="Type">
-            <option value="Private room">Private room</option>
-            <option value="Shared room">Shared room</option>
-        </select><br><br>
+        <form action="/predict" method="post">
+            <label for="Date">Date of Posting:</label>
+            <input type="date" name="Date" required>
 
-        <label for="MinDayNights">Min. Nights:</label>
-        <input type="number" name="MinDayNights" required><br><br>
+            <label for="Area">Which city is property Located?</label>
+            <input type="text" name="Area" required>
 
-        <label for="CountReview">Review Count:</label>
-        <input type="number" name="CountReview" step="0.1" required><br><br>
+            <label for="Location">Location:</label>
+            <select name="Location">
+                <option value="Bronx">Bronx</option>
+                <option value="Brooklyn">Brooklyn</option>
+                <option value="Manhattan">Manhattan</option>
+                <option value="Queens">Queens</option>
+                <option value="Staten Island">Staten Island</option>
+            </select>
 
-        <label for="AvgReview">Avg. Review:</label>
-        <input type="number" name="AvgReview" required><br><br>
+            <label for="Type">Property Type:</label>
+            <select name="Type">
+                <option value="Private room">Private room</option>
+                <option value="Shared room">Shared room</option>
+                <option value="Entire home/apt">Entire home/apt</option>
+            </select>
 
-        <label for="TotalHostListings">Total Listings:</label>
-        <input type="number" name="TotalHostListings" required><br><br>
+            <label for="MinDayNights">How many nights is the minimum stay?</label>
+            <input type="number" name="MinDayNights" step="1" min="0" max="30" required>
 
-        <label for="DayAvailability">Availability (days):</label>
-        <input type="number" name="DayAvailability" required><br><br>
+            <label for="CountReview">How many reviews does your property have?</label>
+            <input type="number" name="CountReview" step="1" min="0" required>
 
-        <button type="submit">Predict Price</button>
-    </form>
+            <label for="AvgReview">What is the average rating score?</label>
+            <input type="number" name="AvgReview" step="0.1" min="0" max="5" required>
 
-    <h3>{{ prediction_text }}</h3>
+            <label for="TotalHostListings">How many properties are listed under your account?</label>
+            <input type="number" name="TotalHostListings" step="1" min="0" max="10" required>
+
+            <label for="DayAvailability">How many days is the property available for booking?</label>
+            <input type="number" name="DayAvailability" min="0" required>
+
+            <button type="submit">Predict Price</button>
+        </form>
+
+        <div class="prediction">{{ prediction_text }}</div>
+    </div>
+
 </body>
 
 </html>
