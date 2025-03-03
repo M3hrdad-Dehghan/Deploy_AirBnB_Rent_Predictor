@@ -1,6 +1,6 @@
 ## About the Project
 
-In this project, I built a price renting predictor using machine learning. This model can be helpful for predicting the daily rental price of accommodation based on various factors
+In this project, I built a price renting predictor using machine learning. This model can help predict the daily rental price of accommodation based on various factors
 
 [![ML Application](https://img.shields.io/badge/ML_Application-Visit-green)](https://deploy-airbnb-rent-predictor.onrender.com) 
 
@@ -15,15 +15,15 @@ In this project, I built a price renting predictor using machine learning. This 
 ## Clone to Repository
 
 ```HTTP
-git clone .........................
+git clone [.........................](https://github.com/M3hrdad-Dehghan/Deploy_AirBnB_Rent_Predictor.git
 ```
 
 ```SSH
-.........................
+git@github.com:M3hrdad-Dehghan/Deploy_AirBnB_Rent_Predictor.git
 ```
 
 ```CLI
-.................................
+gh repo clone M3hrdad-Dehghan/Deploy_AirBnB_Rent_Predictor
 ```
 
 ## Contact
