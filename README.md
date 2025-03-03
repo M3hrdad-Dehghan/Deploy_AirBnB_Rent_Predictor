@@ -15,7 +15,7 @@ In this project, I built a price renting predictor using machine learning. This 
 ## Clone to Repository
 
 ```HTTP
-git clone [.........................](https://github.com/M3hrdad-Dehghan/Deploy_AirBnB_Rent_Predictor.git
+git clone https://github.com/M3hrdad-Dehghan/Deploy_AirBnB_Rent_Predictor.git
 ```
 
 ```SSH
